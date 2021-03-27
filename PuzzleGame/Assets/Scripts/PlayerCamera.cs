@@ -45,9 +45,9 @@ public class PlayerCamera : MonoBehaviour
             rotateValue = new Vector3(-30, -90, 0);
             transform.eulerAngles = rotateValue;
             //ydist = -4.0F;
-            offset = (transform.position.y - 1f) * Time.deltaTime;
-            moveValue = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            transform.position = moveValue;
+            //offset = (transform.position.y - 0.02f);
+            //moveValue = new Vector3(transform.position.x, offset, transform.position.z);
+            //transform.position = moveValue;
         }
         else if (isInverted == false)
         {
@@ -68,6 +68,17 @@ public class PlayerCamera : MonoBehaviour
         centrePoint.rotation = Quaternion.Euler(0, mouseX, mouseY);
         Player.rotation = Quaternion.Euler(0, mouseX, 0);
 
+        if (isInverted == true)
+        {
+            mouseX += Input.GetAxis("Mouse X") * RotationSpeed;
+            mouseY -= Input.GetAxis("Mouse Y") * RotationSpeed;
+            mouseY = Mathf.Clamp(mouseY, -35, 60);
+
+            transform.LookAt(centrePoint);
+
+            centrePoint.rotation = Quaternion.Euler(0, -mouseX, -mouseY);
+            Player.rotation = Quaternion.Euler(0, mouseX, 0);
+        }
        
 
     }
