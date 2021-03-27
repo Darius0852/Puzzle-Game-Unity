@@ -10,7 +10,7 @@ public class BlockMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speedUp = 1.0F;
+        speedUp = 2.0F;
     }
 
 

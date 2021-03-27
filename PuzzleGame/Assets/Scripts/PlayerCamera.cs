@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerCamera : MonoBehaviour
 {
 
-    public float RotationSpeed = 4;
+    public float RotationSpeed = 50;
     public Transform centrePoint, Player;
     float mouseX, mouseY;
 
@@ -44,14 +44,14 @@ public class PlayerCamera : MonoBehaviour
         {
             rotateValue = new Vector3(-30, -90, 0);
             transform.eulerAngles = rotateValue;
-            ydist = -4.0F;
-            offset = transform.position.y;
-            moveValue = new Vector3(transform.position.x, offset, transform.position.z);
+            //ydist = -4.0F;
+            offset = (transform.position.y - 1f) * Time.deltaTime;
+            moveValue = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             transform.position = moveValue;
         }
         else if (isInverted == false)
         {
-            
+            CamControl();
         }
 
     }
@@ -65,8 +65,10 @@ public class PlayerCamera : MonoBehaviour
 
         transform.LookAt(centrePoint);
 
-        centrePoint.rotation = Quaternion.Euler(mouseY, mouseX, 0);
+        centrePoint.rotation = Quaternion.Euler(0, mouseX, mouseY);
         Player.rotation = Quaternion.Euler(0, mouseX, 0);
+
+       
 
     }
 
